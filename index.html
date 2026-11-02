@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">   
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f8f8f4">
+    <meta name="description" content="Jelajahi koleksi smartphone Andini, bandingkan spesifikasi, dan temukan ponsel yang pas untukmu.">
+    <title>Katalog Smartphone | Andini</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="#beranda" aria-label="Andini Katalog Smartphone, beranda">
+            <img src="./logo.jpg" alt="Andini - Katalog Penjualan Smartphone">
+        </a>
+        <nav class="main-nav" aria-label="Navigasi utama">
+            <a class="nav-link" href="#beranda">Home</a>
+            <a class="nav-link active" href="#katalog">Katalog</a>
+            <span class="nav-indicator" id="nav-indicator" aria-hidden="true"></span>
+        </nav>
+        <button class="cart-trigger" id="cart-trigger" type="button" aria-label="Buka keranjang">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20.5 8H6M10 20a.8.8 0 1 1-1.6 0 .8.8 0 0 1 1.6 0Zm8 0a.8.8 0 1 1-1.6 0 .8.8 0 0 1 1.6 0Z"/></svg>
+            <span class="cart-label">Keranjang</span>
+            <span class="cart-count" id="cart-count">0</span>
+        </button>
+    </header>
+
+    <main id="beranda">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-copy">
+                <span class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> KATALOG SMARTPHONE</span>
+                <h1 id="hero-title">Temukan ponsel yang <span>tepat untukmu.</span></h1>
+                <p>Lihat pilihan model, bandingkan spesifikasi, lalu temukan yang sesuai kebutuhanmu.</p>
+                <a class="hero-cta" href="#katalog">Lihat pilihan ponsel <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="hero-visual" aria-label="Smartphone pilihan minggu ini">
+                <img src="./photo-1695048133142-1a20484d2569.avif" alt="Smartphone modern dengan layar penuh" fetchpriority="high">
+                <span class="hero-tag">KOLEKSI PILIHAN</span>
+                <div class="hero-product-label"><span>Temukan favoritmu</span><strong>Teknologi untuk setiap hari</strong></div>
+            </div>
+        </section>
+
+        <section class="catalog-section" id="katalog" aria-labelledby="catalog-title">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow section-eyebrow">SAKUPHONE</span>
+                    <h2 id="catalog-title">Pilihan smartphone</h2>
+                </div>
+                <p class="result-count" id="result-count" aria-live="polite"></p>
+            </div>
+
+            <div class="catalog-toolbar">
+                <div class="filters" id="filters" aria-label="Filter merek"></div>
+                <div class="catalog-controls">
+                    <label class="search-box" for="search-input">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.5 4.5"></path></svg>
+                        <input id="search-input" type="search" placeholder="Cari smartphone..." autocomplete="off">
+                    </label>
+                    <label class="sort-box" for="sort-select"><span>Urutkan</span>
+                        <select id="sort-select" aria-label="Urutkan produk">
+                            <option value="featured">Unggulan</option>
+                            <option value="price-asc">Harga terendah</option>
+                            <option value="price-desc">Harga tertinggi</option>
+                            <option value="name">Nama A–Z</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <div class="product-grid" id="product-grid" aria-live="polite"></div>
+            <div class="empty-state" id="empty-state" hidden>
+                <span aria-hidden="true">⌕</span>
+                <h3>Belum ketemu yang cocok</h3>
+                <p>Coba kata kunci atau filter merek yang berbeda.</p>
+            </div>
+
+            <section class="benefits" aria-label="Keunggulan berbelanja">
+                <div class="benefit-item"><span class="benefit-icon" aria-hidden="true">✓</span><div><strong>Produk pilihan</strong><span>Koleksi smartphone untuk kebutuhanmu</span></div></div>
+                <div class="benefit-item"><span class="benefit-icon" aria-hidden="true">♡</span><div><strong>Belanja lebih mudah</strong><span>Bandingkan harga dan spesifikasi</span></div></div>
+                <div class="benefit-item"><span class="benefit-icon" aria-hidden="true">⌁</span><div><strong>Siap membantu</strong><span>Hubungi kami untuk info produk</span></div></div>
+            </section>
+        </section>
+
+    </main>
+
+    <footer class="site-footer"><a class="brand footer-brand" href="#beranda" aria-label="Andini Katalog Smartphone, beranda"><img src="./logo.jpg" alt="Andini - Katalog Penjualan Smartphone"></a><span>© 2026 Andini · Katalog Smartphone</span></footer>
+
+    <dialog class="product-dialog" id="product-dialog" aria-labelledby="detail-name">
+        <div class="detail-layout">
+            <div class="detail-media"><img id="detail-image" src="" alt=""></div>
+            <div class="detail-content">
+                <button class="icon-button detail-close" id="close-detail" type="button" aria-label="Tutup detail">×</button>
+                <span class="eyebrow section-eyebrow" id="detail-brand"></span>
+                <h2 id="detail-name"></h2>
+                <p class="detail-spec" id="detail-spec"></p>
+                <p class="detail-description" id="detail-description"></p>
+                <div class="detail-purchase">
+                    <strong id="detail-price"></strong>
+                    <button class="checkout-button" id="detail-add" type="button">Tambah ke keranjang <span aria-hidden="true">+</span></button>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+    <aside class="cart-drawer" id="cart-drawer" aria-labelledby="cart-title" aria-hidden="true" inert>
+        <div class="drawer-header"><div><span class="eyebrow section-eyebrow">PILIHANMU</span><h2 id="cart-title">Keranjang <span id="drawer-count">(0)</span></h2></div><button class="icon-button" id="close-cart" type="button" aria-label="Tutup keranjang">×</button></div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-empty" id="cart-empty"><span aria-hidden="true">＋</span><p>Keranjangmu masih kosong.</p><button type="button" id="continue-shopping">Lihat katalog</button></div>
+        <div class="drawer-footer" id="drawer-footer" hidden>
+            <label class="select-all"><input id="select-all-cart" type="checkbox" checked><span>Pilih semua</span></label>
+            <div class="checkout-card">
+                <div class="subtotal"><span>Total pesanan</span><strong id="cart-subtotal">Rp0</strong></div>
+                <p>Ongkir dihitung saat konfirmasi pesanan.</p>
+                <button class="checkout-button" id="checkout-button" type="button">Checkout <span class="checkout-count" id="checkout-count">(0)</span></button>
+            </div>
+        </div>
+    </aside>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
