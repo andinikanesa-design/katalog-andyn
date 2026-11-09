@@ -28,8 +28,26 @@ const drawerFooter = document.querySelector('#drawer-footer');
 const selectAllCart = document.querySelector('#select-all-cart');
 const toast = document.querySelector('#toast');
 const productDialog = document.querySelector('#product-dialog');
+const checkoutDialog = document.querySelector('#checkout-dialog');
+const checkoutForm = document.querySelector('#checkout-form');
+const checkoutSummaryItems = document.querySelector('#checkout-summary-items');
+const checkoutTotal = document.querySelector('#checkout-total');
+const checkoutSubmitTotal = document.querySelector('#checkout-submit-total');
 const mainNav = document.querySelector('.main-nav');
 const navIndicator = document.querySelector('#nav-indicator');
+const themeToggle = document.querySelector('#theme-toggle');
+const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+
+function setTheme(theme) {
+	document.documentElement.dataset.theme = theme;
+	const isDark = theme === 'dark';
+	themeToggle.setAttribute('aria-pressed', String(isDark));
+	themeToggle.setAttribute('aria-label', `Aktifkan mode ${isDark ? 'terang' : 'gelap'}`);
+	themeToggle.title = `Aktifkan mode ${isDark ? 'terang' : 'gelap'}`;
+	themeColorMeta.content = isDark ? '#261218' : '#fefaf3';
+}
+
+setTheme(localStorage.getItem('katalog-andyn-theme') === 'dark' ? 'dark' : 'light');
 
 const formatPrice = (price) => new Intl.NumberFormat('id-ID', {
 	style: 'currency',
@@ -130,6 +148,22 @@ function renderCart() {
 			</article>
 		`;
 	}).join('');
+}
+
+function openCheckoutDialog() {
+	const selectedEntries = Object.entries(cart).filter(([id, quantity]) => quantity > 0 && selectedCart.has(id));
+	const total = selectedEntries.reduce((sum, [id, quantity]) => {
+		const product = products.find((item) => item.id === id);
+		return sum + product.price * quantity;
+	}, 0);
+
+	checkoutSummaryItems.innerHTML = selectedEntries.map(([id, quantity]) => {
+		const product = products.find((item) => item.id === id);
+		return `<div class="checkout-summary-row"><span>${product.name} × ${quantity}</span><strong>${formatPrice(product.price * quantity)}</strong></div>`;
+	}).join('');
+	checkoutTotal.textContent = formatPrice(total);
+	checkoutSubmitTotal.textContent = `(${formatPrice(total)})`;
+	checkoutDialog.showModal();
 }
 
 function showToast(message) {
@@ -255,11 +289,51 @@ document.querySelector('#cart-trigger').addEventListener('click', () => setDrawe
 document.querySelector('#close-cart').addEventListener('click', () => setDrawerOpen(false));
 document.querySelector('#continue-shopping').addEventListener('click', () => setDrawerOpen(false));
 drawerBackdrop.addEventListener('click', () => setDrawerOpen(false));
+themeToggle.addEventListener('click', () => {
+	const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+	setTheme(theme);
+	localStorage.setItem('katalog-andyn-theme', theme);
+});
+document.querySelector('#checkout-button').addEventListener('click', openCheckoutDialog);
+document.querySelector('#close-checkout').addEventListener('click', () => checkoutDialog.close());
+checkoutDialog.addEventListener('click', (event) => {
+	if (event.target === checkoutDialog) checkoutDialog.close();
+});
+checkoutDialog.addEventListener('close', () => document.querySelector('#checkout-button').focus());
+checkoutForm.addEventListener('submit', (event) => {
+	event.preventDefault();
+	const formData = new FormData(checkoutForm);
+	const items = Object.entries(cart)
+		.filter(([id, quantity]) => quantity > 0 && selectedCart.has(id))
+		.map(([id, quantity]) => {
+			const product = products.find((item) => item.id === id);
+			return `- ${product.name} × ${quantity}: ${formatPrice(product.price * quantity)}`;
+		});
+	const total = Object.entries(cart)
+		.filter(([id, quantity]) => quantity > 0 && selectedCart.has(id))
+		.reduce((sum, [id, quantity]) => sum + products.find((item) => item.id === id).price * quantity, 0);
+	const message = [
+		'Halo, saya ingin membuat pesanan:',
+		...items,
+		`Total produk: ${formatPrice(total)}`,
+		'',
+		`Nama penerima: ${formData.get('name')}`,
+		`WhatsApp: ${formData.get('phone')}`,
+		`Alamat pengiriman: ${formData.get('address')}`,
+		`Metode pembayaran: ${formData.get('payment')}`,
+		'Ongkir mohon dikonfirmasi.'
+	].join('\n');
+	const whatsappWindow = window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+	if (!whatsappWindow) {
+		showToast('Izinkan pop-up di browser untuk melanjutkan pesanan melalui WhatsApp.');
+		return;
+	}
+	whatsappWindow.opener = null;
+	checkoutDialog.close();
+	showToast('Pesanan siap. Periksa dan kirim pesan melalui WhatsApp.');
+});
 document.addEventListener('keydown', (event) => {
 	if (event.key === 'Escape' && cartDrawer.classList.contains('open')) setDrawerOpen(false);
-});
-document.querySelector('#checkout-button').addEventListener('click', () => {
-	showToast('Checkout belum terhubung. Hubungi pemilik toko untuk menyelesaikan pesanan.');
 });
 
 renderFilters();

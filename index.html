@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#f8f8f4">
+    <meta name="theme-color" content="#fefaf3">
     <meta name="description" content="Jelajahi koleksi smartphone Andini, bandingkan spesifikasi, dan temukan ponsel yang pas untukmu.">
     <title>Katalog Smartphone | Andini</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,13 +15,28 @@
 <body>
     <header class="site-header">
         <a class="brand" href="#beranda" aria-label="Andini Katalog Smartphone, beranda">
-            <img src="./logo.jpg" alt="Andini - Katalog Penjualan Smartphone">
+            <svg class="brand-mark" viewBox="0 0 56 56" aria-hidden="true">
+                <rect x="1" y="1" width="54" height="54" rx="18" fill="var(--ink)"/>
+                <g transform="rotate(-8 28 28)">
+                    <rect x="17" y="7" width="23" height="42" rx="7" fill="var(--paper)"/>
+                    <rect x="19.5" y="13" width="18" height="29" rx="3.5" fill="var(--green-dark)"/>
+                    <rect x="24" y="9.5" width="9" height="1.5" rx=".75" fill="var(--muted)"/>
+                    <path d="M28.5 17 36 37h-4.1l-1.6-4.6h-7L21.6 37h-4l7.7-20h3.2Zm.4 11.1-2.1-6-2.1 6h4.2Z" fill="var(--ink)"/>
+                </g>
+                <path d="M5 34c7 11 25 14 45-12" fill="none" stroke="var(--paper)" stroke-linecap="round" stroke-width="2.4"/>
+                <path d="m45 13 1.5-3.5L48 13l3.5 1.5L48 16l-1.5 3.5L45 16l-3.5-1.5L45 13Z" fill="var(--green-dark)"/>
+            </svg>
+            <span class="brand-copy"><strong>Andyny</strong><span>SMARTPHONE CATALOG</span></span>
         </a>
         <nav class="main-nav" aria-label="Navigasi utama">
             <a class="nav-link" href="#beranda">Home</a>
             <a class="nav-link active" href="#katalog">Katalog</a>
             <span class="nav-indicator" id="nav-indicator" aria-hidden="true"></span>
         </nav>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Aktifkan mode gelap" title="Aktifkan mode gelap" aria-pressed="false">
+            <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path></svg>
+            <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.4A8.5 8.5 0 0 1 8.6 3.8 8.5 8.5 0 1 0 20.2 15.4Z"></path></svg>
+        </button>
         <button class="cart-trigger" id="cart-trigger" type="button" aria-label="Buka keranjang">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20.5 8H6M10 20a.8.8 0 1 1-1.6 0 .8.8 0 0 1 1.6 0Zm8 0a.8.8 0 1 1-1.6 0 .8.8 0 0 1 1.6 0Z"/></svg>
             <span class="cart-label">Keranjang</span>
@@ -87,7 +102,20 @@
 
     </main>
 
-    <footer class="site-footer"><a class="brand footer-brand" href="#beranda" aria-label="Andini Katalog Smartphone, beranda"><img src="./logo.jpg" alt="Andini - Katalog Penjualan Smartphone"></a><span>© 2026 Andini · Katalog Smartphone</span></footer>
+    <footer class="site-footer"><a class="brand footer-brand" href="#beranda" aria-label="Andini Katalog Smartphone, beranda">
+        <svg class="brand-mark" viewBox="0 0 56 56" aria-hidden="true">
+            <rect x="1" y="1" width="54" height="54" rx="18" fill="var(--ink)"/>
+            <g transform="rotate(-8 28 28)">
+                <rect x="17" y="7" width="23" height="42" rx="7" fill="var(--paper)"/>
+                <rect x="19.5" y="13" width="18" height="29" rx="3.5" fill="var(--green-dark)"/>
+                <rect x="24" y="9.5" width="9" height="1.5" rx=".75" fill="var(--muted)"/>
+                <path d="M28.5 17 36 37h-4.1l-1.6-4.6h-7L21.6 37h-4l7.7-20h3.2Zm.4 11.1-2.1-6-2.1 6h4.2Z" fill="var(--ink)"/>
+            </g>
+            <path d="M5 34c7 11 25 14 45-12" fill="none" stroke="var(--paper)" stroke-linecap="round" stroke-width="2.4"/>
+            <path d="m45 13 1.5-3.5L48 13l3.5 1.5L48 16l-1.5 3.5L45 16l-3.5-1.5L45 13Z" fill="var(--green-dark)"/>
+        </svg>
+        <span class="brand-copy"><strong>Andyny</strong><span>SMARTPHONE CATALOG</span></span>
+    </a><span>© 2026 Andyny · Katalog Smartphone</span></footer>
 
     <dialog class="product-dialog" id="product-dialog" aria-labelledby="detail-name">
         <div class="detail-layout">
@@ -104,6 +132,44 @@
                 </div>
             </div>
         </div>
+    </dialog>
+
+    <dialog class="checkout-dialog" id="checkout-dialog" aria-labelledby="checkout-title">
+        <div class="checkout-dialog-header">
+            <div>
+                <span class="eyebrow section-eyebrow">PESANANMU</span>
+                <h2 id="checkout-title">Konfirmasi pesanan</h2>
+            </div>
+            <button class="icon-button" id="close-checkout" type="button" aria-label="Tutup konfirmasi pesanan">×</button>
+        </div>
+        <form id="checkout-form">
+            <section class="checkout-summary" aria-labelledby="checkout-summary-title">
+                <h3 id="checkout-summary-title">Ringkasan pesanan</h3>
+                <div class="checkout-summary-items" id="checkout-summary-items"></div>
+                <div class="checkout-summary-total"><span>Total produk</span><strong id="checkout-total"></strong></div>
+                <p>Ongkir dan detail pesanan akan dikonfirmasi melalui WhatsApp.</p>
+            </section>
+            <div class="checkout-fields">
+                <label for="customer-name">Nama lengkap penerima</label>
+                <input id="customer-name" name="name" type="text" placeholder="Contoh: Aiden Jaspr Nathaniel" autocomplete="name" required>
+
+                <label for="customer-phone">Nomor WhatsApp aktif</label>
+                <input id="customer-phone" name="phone" type="tel" placeholder="Contoh: 08123456789" autocomplete="tel" required>
+                <p class="checkout-field-hint">Konfirmasi pesanan dan status pengiriman akan dibahas melalui WhatsApp.</p>
+
+                <label for="customer-address">Alamat lengkap pengiriman</label>
+                <textarea id="customer-address" name="address" rows="3" placeholder="Nama jalan, nomor rumah, RT/RW, kelurahan, kecamatan, kota, dan kode pos" autocomplete="street-address" required></textarea>
+
+                <label for="payment-method">Metode pembayaran</label>
+                <select id="payment-method" name="payment" required>
+                    <option value="Transfer Bank BRI">Transfer Bank BRI</option>
+                    <option value="Transfer Bank BCA">Transfer Bank BCA</option>
+                    <option value="Transfer Bank Mandiri">Transfer Bank Mandiri</option>
+                    <option value="QRIS">QRIS</option>
+                </select>
+            </div>
+            <button class="checkout-submit" type="submit">Konfirmasi &amp; Buat Pesanan <span id="checkout-submit-total"></span></button>
+        </form>
     </dialog>
 
     <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
